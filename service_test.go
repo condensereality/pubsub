@@ -28,7 +28,8 @@ func TestSubscribePublish(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	s.Publish(ctx, "topic", []byte("ok"))
+	payload := []byte("ok")
+	s.Publish(ctx, "topic", &payload)
 
 	ctxDoneCh := ctx.Done()
 	for {
@@ -61,7 +62,8 @@ func TestUnsubscribe(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	s.Publish(ctx, "topic", []byte("ok"))
+	payload := []byte("ok")
+	s.Publish(ctx, "topic", &payload)
 
 	ctxDoneCh := ctx.Done()
 	for {

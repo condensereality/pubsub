@@ -10,7 +10,7 @@ import (
 type Handler interface{}
 
 // Payload of the message
-type Payload []byte
+type Payload *[]byte
 
 // Service allows to subscribe/publish messages
 type Service interface {
