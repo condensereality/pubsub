@@ -9,7 +9,12 @@ help:
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 build: ## generates the gRPC client and server interfaces from `*.proto` service definition
-	protoc --go_out=plugins=grpc:. pubsub.proto
+	protoc \
+		--go_out=. \
+		--go-grpc_out=. \
+		--go_opt=paths=source_relative \
+		--go-grpc_opt=paths=source_relative \
+		pubsub.proto
 
 mock: ## generates mocks for gRPC client and server
 	mockgen -source=pubsub.pb.go -destination=../mock_proto/mock.go -package=mock_proto
